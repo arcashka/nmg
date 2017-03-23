@@ -12,6 +12,7 @@
 #include "transform3d.h"
 #include "vertex.h"
 #include "light.h"
+#include "camera.h"
 
 
 
@@ -25,8 +26,6 @@ class Window : public QOpenGLWidget,
 // OpenGL Events
 public:
     ~Window();
-    Window();
-    Window(QGroupBox&);
     Window(QGroupBox*);
     void initializeGL();
     void resizeGL(int width, int height);
@@ -67,19 +66,15 @@ private:
 
     // OpenGL State Information
     QOpenGLBuffer m_vertex;
-    QOpenGLVertexArrayObject m_object;
-    QOpenGLShaderProgram *m_program;
+    QOpenGLVertexArrayObject vao;
+    QOpenGLShaderProgram *program;
 
     // Textures
     QOpenGLTexture *texture;
     QOpenGLTexture *normalMap;
     QOpenGLTexture *specularMap;
 
-    QImage diffuseMapImage;
-    QImage normalMapImage;
-    QImage specularMapImage;
 
-    void bindTextures();
 
     // Shader Information
 
@@ -92,15 +87,12 @@ private:
 
     int u_modelToWorld;
     int u_worldToView;
+    int u_lookat;
     int u_texture;
-    QMatrix4x4 m_projection;
-    Transform3D m_transform;
-    light m_light;
-
-
-
-    // Private Helpers
-    void printContextInformation();
+    QMatrix4x4 projection;
+    Transform3D transform;
+    Camera camera;
+    Light light;
 };
 
 #endif // WINDOW_H
