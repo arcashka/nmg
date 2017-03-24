@@ -22,9 +22,8 @@ SOURCES += main.cpp\
     src_generators/ssaogenerator.cpp \
     src_gui/listwidget.cpp \
     window.cpp \
-    transform3d.cpp \
     light.cpp \
-    camera.cpp
+    scene.cpp
 
 HEADERS  += src_gui/mainwindow.h \
     src_generators/intensitymap.h \
@@ -40,10 +39,9 @@ HEADERS  += src_gui/mainwindow.h \
     src_gui/listwidget.h \
     src_gui/clickablelabel.h \
     window.h \
-    transform3d.h \
     vertex.h \
     light.h \
-    camera.h
+    scene.h
 
 FORMS    += src_gui/mainwindow.ui
 

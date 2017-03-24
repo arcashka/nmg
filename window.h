@@ -9,10 +9,8 @@
 #include <QMatrix4x4>
 #include <QGroupBox>
 #include <QOpenGLTexture>
-#include "transform3d.h"
-#include "vertex.h"
 #include "light.h"
-#include "camera.h"
+#include "scene.h"
 
 
 
@@ -31,9 +29,6 @@ public:
     void resizeGL(int width, int height);
     void paintGL();
     void teardownGL();
-    void addDiffuse(QImage& difMap);
-    void addNormal(QImage& norMap);
-    void addSpecular(QImage& specMap);
 
 protected:
     void mousePressEvent(QMouseEvent* pe);
@@ -44,28 +39,15 @@ protected slots:
     void update();
 
 private:
-    bool haveDiffuse = false;
-    bool changedDiffuse = false;
+    Scene scene;
 
-    bool haveSpecular = false;
-    bool changedSpecular = false;
-
-    bool haveNormal = false;
-    bool changedNormal = false;
-
-
-    bool pressed = false;
-
-    GLfloat xRot = 0.0f;
-    GLfloat yRot = 0.0f;
-    GLfloat nSca = 1.0f;
+    bool pressed;
     QPoint ptrMousePosition;
-
     void scalePlus();
     void scaleMinus();
 
     // OpenGL State Information
-    QOpenGLBuffer m_vertex;
+    QOpenGLBuffer bufferForVertices;
     QOpenGLVertexArrayObject vao;
     QOpenGLShaderProgram *program;
 
@@ -74,24 +56,16 @@ private:
     QOpenGLTexture *normalMap;
     QOpenGLTexture *specularMap;
 
+    GLuint u_lightColor;
+    GLuint u_lightAmbI;
+    GLuint u_lightDifI;
+    GLuint u_lightDir;
+    GLuint u_lightSpec;
 
-
-    // Shader Information
-
-    // light
-    int u_lightColor;
-    int u_lightAmbI;
-    int u_lightDifI;
-    int u_lightDir;
-    int u_lightSpec;
-
-    int u_modelToWorld;
-    int u_worldToView;
-    int u_lookat;
-    int u_texture;
+    GLuint u_modelToWorld;
+    GLuint u_worldToView;
+    GLuint u_texture;
     QMatrix4x4 projection;
-    Transform3D transform;
-    Camera camera;
     Light light;
 };
 

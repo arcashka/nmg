@@ -3,7 +3,6 @@
 #include <QVector3D>
 #include <QQuaternion>
 #include <QMatrix4x4>
-#include "vertex.h"
 
 class Light
 {

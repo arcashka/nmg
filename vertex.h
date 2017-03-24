@@ -17,4 +17,9 @@ public:
 private:
     QVector3D position;
 };
+
+Vertex::Vertex(const QVector3D &position) {
+    this->position = position;
+}
+
 #endif // VERTEX_H

@@ -166,7 +166,7 @@ bool MainWindow::load(QUrl url) {
     //load the image
     input = QImage(url.toLocalFile());
     ui->openGLWidget->setFocus();
-    ui->openGLWidget->addDiffuse(input);
+    //ui->openGLWidget->addDiffuse(input);
 
     if(input.isNull()) {
         QString errorMessage("Image not loaded!");
@@ -410,7 +410,7 @@ void MainWindow::calcNormalAndPreview() {
     calcNormal();
 
 
-    ui->openGLWidget->addNormal(normalmap);
+    //ui->openGLWidget->addNormal(normalmap);
 
     //display time it took to calculate the map
     this->lastCalctime_normal = timer.elapsed();
@@ -433,7 +433,7 @@ void MainWindow::calcSpecAndPreview() {
     //calculate map
     calcSpec();
 
-    ui->openGLWidget->addSpecular(specmap);
+    //ui->openGLWidget->addSpecular(specmap);
     //display time it took to calculate the map
     this->lastCalctime_specular = timer.elapsed();
     displayCalcTime(lastCalctime_specular, "specularmap", 5000);
