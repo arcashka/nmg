@@ -13,8 +13,10 @@ INPUT(
 ./release\ssaogenerator.o
 ./release\listwidget.o
 ./release\window.o
-./release\transform3d.o
 ./release\light.o
+./release\scene.o
+./release\transform.o
+./release\camera.o
 ./release\qrc_resource.o
 ./release\moc_mainwindow.o
 ./release\moc_graphicsview.o

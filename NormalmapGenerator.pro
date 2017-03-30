@@ -23,7 +23,9 @@ SOURCES += main.cpp\
     src_gui/listwidget.cpp \
     window.cpp \
     light.cpp \
-    scene.cpp
+    scene.cpp \
+    transform.cpp \
+    camera.cpp
 
 HEADERS  += src_gui/mainwindow.h \
     src_generators/intensitymap.h \
@@ -41,7 +43,9 @@ HEADERS  += src_gui/mainwindow.h \
     window.h \
     vertex.h \
     light.h \
-    scene.h
+    scene.h \
+    transform.h \
+    camera.h
 
 FORMS    += src_gui/mainwindow.ui
 

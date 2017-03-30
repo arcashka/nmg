@@ -29,22 +29,18 @@ public:
     void resizeGL(int width, int height);
     void paintGL();
     void teardownGL();
-
 protected:
+    void keyPressEvent(QKeyEvent* event);
     void mousePressEvent(QMouseEvent* pe);
     void mouseMoveEvent(QMouseEvent* pe);
     void mouseReleaseEvent(QMouseEvent*);
-    void wheelEvent(QWheelEvent* pe);
 protected slots:
     void update();
-
 private:
     Scene scene;
-
+    float cameraSpeed = 0.01f;
     bool pressed;
     QPoint ptrMousePosition;
-    void scalePlus();
-    void scaleMinus();
 
     // OpenGL State Information
     QOpenGLBuffer bufferForVertices;
@@ -63,9 +59,9 @@ private:
     GLuint u_lightSpec;
 
     GLuint u_modelToWorld;
-    GLuint u_worldToView;
+    GLuint u_worldToCamera;
+    GLuint u_cameraToView;
     GLuint u_texture;
-    QMatrix4x4 projection;
     Light light;
 };
 
