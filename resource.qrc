@@ -2,5 +2,7 @@
     <qresource prefix="/shaders">
         <file>shader.frag</file>
         <file>shader.vert</file>
+        <file>shader.tessc</file>
+        <file>shader.tesse</file>
     </qresource>
 </RCC>

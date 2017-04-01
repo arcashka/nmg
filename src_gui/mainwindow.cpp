@@ -367,6 +367,10 @@ void MainWindow::calcDisplace() {
     SpecularmapGenerator specularmapGenerator(mode, redMultiplier, greenMultiplier, blueMultiplier, alphaMultiplier);
     displacementmap = specularmapGenerator.calculateSpecmap(input, scale, contrast);
 
+
+    ui->openGLWidget->addDisplacement(displacementmap);
+
+
     if(ui->checkBox_displace_blur->isChecked()) {
         int radius = ui->spinBox_displace_blurRadius->value();
         bool tileable = ui->checkBox_displace_blur_tileable->isChecked();
@@ -410,7 +414,7 @@ void MainWindow::calcNormalAndPreview() {
     calcNormal();
 
 
-    ui->openGLWidget->addNormal(normalmap);
+    //ui->openGLWidget->addNormal(normalmap);
 
     //display time it took to calculate the map
     this->lastCalctime_normal = timer.elapsed();
@@ -433,7 +437,7 @@ void MainWindow::calcSpecAndPreview() {
     //calculate map
     calcSpec();
 
-    ui->openGLWidget->addSpecular(specmap);
+    //ui->openGLWidget->addSpecular(specmap);
     //display time it took to calculate the map
     this->lastCalctime_specular = timer.elapsed();
     displayCalcTime(lastCalctime_specular, "specularmap", 5000);
@@ -899,7 +903,6 @@ int MainWindow::calcPercentage(int value, int percentage) {
     return (int) (((double)value / 100.0) * percentage);
 }
 
-
 //connects gui buttons with Slots in this class
 void MainWindow::connectSignalSlots() {
     //connect signals/slots
@@ -1100,7 +1103,6 @@ void MainWindow::readSettings()
 
     qsettings.endGroup();
 }
-
 
 void MainWindow::setUiColors() {
     if(useCustomUiColors) {

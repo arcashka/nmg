@@ -1,0 +1,30 @@
+#version 440 core
+
+layout (quads , fractional_odd_spacing) in;
+
+patch in highp vec3 normal;
+patch in highp mat3 tbn;
+in highp vec2[] tc;
+
+out vec2 highp tcOut;
+
+uniform sampler2D displacementMap;
+
+uniform mat4 modelToWorld;
+uniform mat4 worldToCamera;
+uniform mat4 cameraToView;
+
+void main(void)
+{
+    vec2 tc1 = mix(tc[0], tc[1], gl_TessCoord.x);
+    vec2 tc2 = mix(tc[2], tc[3], gl_TessCoord.x);
+    tcOut = mix(tc2, tc1, gl_TessCoord.y);
+
+    vec4 p1 = mix(gl_in[0].gl_Position, gl_in[1].gl_Position, gl_TessCoord.x);
+    vec4 p2 = mix(gl_in[2].gl_Position, gl_in[3].gl_Position, gl_TessCoord.x);
+    vec4 p = mix(p2, p1, gl_TessCoord.y);
+
+    p += vec4(normal, 1.0) * texture(displacementMap, tcOut).r;
+
+    gl_Position = cameraToView * worldToCamera * modelToWorld * p;
+}

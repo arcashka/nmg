@@ -8,7 +8,7 @@ TEMPLATE = app
 QMAKE_CXXFLAGS += -fopenmp -std=c++11
 LIBS += -fopenmp
 
-SOURCES += main.cpp\
+SOURCES += src_viewer/main.cpp\
         src_gui/mainwindow.cpp \
     src_generators/intensitymap.cpp \
     src_generators/normalmapgenerator.cpp \
@@ -21,9 +21,12 @@ SOURCES += main.cpp\
     src_generators/boxblur.cpp \
     src_generators/ssaogenerator.cpp \
     src_gui/listwidget.cpp \
-    window.cpp \
-    transform3d.cpp \
-    light.cpp
+    src_gui/openglwidget.cpp \
+    src_viewer/camera.cpp \
+    src_viewer/light.cpp \
+    src_viewer/scene.cpp \
+    src_viewer/transform.cpp \
+    src_viewer/window.cpp
 
 HEADERS  += src_gui/mainwindow.h \
     src_generators/intensitymap.h \
@@ -38,10 +41,13 @@ HEADERS  += src_gui/mainwindow.h \
     src_generators/ssaogenerator.h \
     src_gui/listwidget.h \
     src_gui/clickablelabel.h \
-    window.h \
-    transform3d.h \
-    vertex.h \
-    light.h
+    src_gui/openglwidget.h \
+    src_viewer/camera.h \
+    src_viewer/light.h \
+    src_viewer/scene.h \
+    src_viewer/transform.h \
+    src_viewer/vertex.h \
+    src_viewer/window.h
 
 FORMS    += src_gui/mainwindow.ui
 
