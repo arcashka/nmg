@@ -69,44 +69,14 @@ void Scene::addDiffuseMap(QImage &diffuseMap, QOpenGLShaderProgram &program)
 {
     diffuse = QImage(diffuseMap);
     diffuseMapStored = true;
-
-    // creating
-    this->diffuseMap = new QOpenGLTexture(diffuse.mirrored());
-    this->diffuseMap->setMinificationFilter(QOpenGLTexture::Linear);
-    this->diffuseMap->setMagnificationFilter(QOpenGLTexture::Linear);
-
-    // add to our program
-    program.bind();
-    this->diffuseMap->bind();
-    glActiveTexture(GL_TEXTURE0);
-    glUniform1i(program.uniformLocation("diffuseMap"), 0);
-    this->diffuseMap->release();
-
     ready = checkForReady();
-
-    program.release();
 }
 
 void Scene::addDisplacementMap(QImage &displacementMap, QOpenGLShaderProgram &program)
 {
     displacement = QImage(displacementMap);
     displacementMapStored = true;
-
-    // creating
-    this->displacementMap = new QOpenGLTexture(displacement.mirrored());
-    this->displacementMap->setMinificationFilter(QOpenGLTexture::Linear);
-    this->displacementMap->setMagnificationFilter(QOpenGLTexture::Linear);
-
-    // add to our program
-    program.bind();
-    this->displacementMap->bind();
-    glActiveTexture(GL_TEXTURE1);
-    glUniform1i(program.uniformLocation("displacementMap"), 1);
-    this->displacementMap->release();
-
     ready = checkForReady();
-
-    program.release();
 }
 
 bool Scene::checkForReady()

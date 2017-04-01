@@ -61,6 +61,10 @@ public:
     void addDiffuseMap(QImage &diffuseMap, QOpenGLShaderProgram &program);
     void addDisplacementMap(QImage &displacementMap, QOpenGLShaderProgram &program);
 
+    // getters for texture
+    QImage &getDiffuse()        { return diffuse; }
+    QImage &getDisplacement()   { return displacement; }
+
 
 private:
     // transformation matrice
@@ -78,8 +82,6 @@ private:
     // Textures
     QImage diffuse;
     QImage displacement;
-    QOpenGLTexture *diffuseMap;
-    QOpenGLTexture *displacementMap;
 
     // flags for textures
     bool diffuseMapStored       = false;

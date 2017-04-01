@@ -154,6 +154,27 @@ void Window::paintGL()
     program->bind();
     if(scene.isReady())
     {
+        // diffuse map attaching
+        {
+            this->diffuseMap = new QOpenGLTexture(scene.getDiffuse().mirrored());
+            this->diffuseMap->setMinificationFilter(QOpenGLTexture::Linear);
+            this->diffuseMap->setMagnificationFilter(QOpenGLTexture::Linear);
+            glActiveTexture(GL_TEXTURE0);
+            this->diffuseMap->bind();
+            //program->setUniformValue(program->uniformLocation("diffuseMap"), );
+            glUniform1i(program->uniformLocation("diffuseMap"), 0);
+            this->diffuseMap->release();
+        }
+        // displacement map attaching
+        {
+            this->displacementMap = new QOpenGLTexture(scene.getDisplacement().mirrored());
+            this->displacementMap->setMinificationFilter(QOpenGLTexture::Linear);
+            this->displacementMap->setMagnificationFilter(QOpenGLTexture::Linear);
+            glActiveTexture(GL_TEXTURE1);
+            this->displacementMap->bind();
+            glUniform1i(program->uniformLocation("displacementMap"), 1);
+            this->displacementMap->release();
+        }
         vao.bind();
         glDrawArrays(GL_PATCHES, 0, sizeof(vertices) / sizeof(vertices[0]));
         qDebug() << program->log();
