@@ -1660,7 +1660,11 @@
            </widget>
           </item>
           <item>
-           <widget class="Window" name="openGLWidget"/>
+           <widget class="Window" name="openGLWidget">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>

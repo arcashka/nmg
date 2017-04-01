@@ -166,7 +166,7 @@ bool MainWindow::load(QUrl url) {
     //load the image
     input = QImage(url.toLocalFile());
     ui->openGLWidget->setFocus();
-    //ui->openGLWidget->addDiffuse(input);
+    ui->openGLWidget->addDiffuse(input);
 
     if(input.isNull()) {
         QString errorMessage("Image not loaded!");
@@ -366,6 +366,10 @@ void MainWindow::calcDisplace() {
     //setup generator and calculate map
     SpecularmapGenerator specularmapGenerator(mode, redMultiplier, greenMultiplier, blueMultiplier, alphaMultiplier);
     displacementmap = specularmapGenerator.calculateSpecmap(input, scale, contrast);
+
+
+    ui->openGLWidget->addDisplacement(displacementmap);
+
 
     if(ui->checkBox_displace_blur->isChecked()) {
         int radius = ui->spinBox_displace_blurRadius->value();
@@ -899,7 +903,6 @@ int MainWindow::calcPercentage(int value, int percentage) {
     return (int) (((double)value / 100.0) * percentage);
 }
 
-
 //connects gui buttons with Slots in this class
 void MainWindow::connectSignalSlots() {
     //connect signals/slots
@@ -1100,7 +1103,6 @@ void MainWindow::readSettings()
 
     qsettings.endGroup();
 }
-
 
 void MainWindow::setUiColors() {
     if(useCustomUiColors) {

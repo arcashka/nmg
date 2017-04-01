@@ -1,7 +1,9 @@
-#version 330 core
-in highp vec3 posColor;
+#version 440 core
+in highp vec2 tcOut;
 
 out highp vec4 fColor;
+
+uniform sampler2D diffuseMap;
 
 struct Light
 {
@@ -16,5 +18,5 @@ uniform Light light;
 
 void main()
 {
-    fColor = vec4(posColor, 1.0);
+    fColor = vec4(0.0, 0.0, 0.0, 1.0);//  texture(diffuseMap, tcOut);
 }
