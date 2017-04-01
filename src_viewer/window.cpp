@@ -38,7 +38,6 @@ void Window::initializeGL()
     program->addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/shader.frag");
     program->addShaderFromSourceFile(QOpenGLShader::TessellationControl, ":/shaders/shader.tessc");
     program->addShaderFromSourceFile(QOpenGLShader::TessellationEvaluation, ":/shaders/shader.tesse");
-    program->setPatchVertexCount(4);
     program->link();
     program->bind();
 
@@ -64,6 +63,10 @@ void Window::initializeGL()
     vao.create();
     vao.bind();
 
+
+    program->setPatchVertexCount(4);
+
+
     program->enableAttributeArray(0);
     program->setAttributeBuffer(0, GL_FLOAT, 0, 3, 0);
 
@@ -77,7 +80,6 @@ void Window::initializeGL()
     program->setUniformValue(u_cameraToView, scene.getCameraToViewMatrix());
     program->setUniformValue(u_worldToCamera, scene.getWorldToCameraMatrix());
     program->setUniformValue(u_modelToWorld, scene.getModelToWorldMatrix());
-
     vao.release();
     bufferForVertices.release();
     program->release();

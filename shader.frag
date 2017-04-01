@@ -18,5 +18,5 @@ uniform Light light;
 
 void main()
 {
-    fColor = vec4(0.0, 0.0, 0.0, 1.0);//  texture(diffuseMap, tcOut);
+    fColor = texture(diffuseMap, tcOut);
 }
