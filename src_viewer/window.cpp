@@ -170,7 +170,6 @@ void Window::paintGL()
         glDrawArrays(GL_PATCHES, 0, sizeof(vertices) / sizeof(vertices[0]));
         this->diffuseMap->release();
         this->displacementMap->release();
-        qDebug() << program->log();
         vao.release();
     }
     program->release();

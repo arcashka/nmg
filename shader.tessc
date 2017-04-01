@@ -4,7 +4,11 @@ layout (vertices = 4) out;
 
 patch out highp vec3 normal;
 patch out highp mat3 tbn;
-out highp vec2[] tc;
+
+out TSC_OUT
+{
+    vec2 tc;
+} tscOut[];
 
 uniform mat4 modelToWorld;
 uniform mat4 worldToCamera;
@@ -19,14 +23,14 @@ float lenght(vec2 a)
 void main(void)
 {
     mat4 mvp = cameraToView * worldToCamera * modelToWorld;
-    const vec2 tc[] = const vec2[] (
-        vec2(1.0, 1.0),
-        vec2(0.0, 1.0),
-        vec2(0.0, 0.0),
-        vec2(1.0, 0.0)
-    );
-    vec2 uv1 = tc[1] - tc[0];
-    vec2 uv2 = tc[3] - tc[0];
+
+    tscOut[0].tc = vec2(1.0, 1.0);
+    tscOut[1].tc = vec2(0.0, 1.0);
+    tscOut[2].tc = vec2(1.0, 0.0);
+    tscOut[3].tc = vec2(0.0, 0.0);
+
+    vec2 uv1 = tscOut[1].tc - tscOut[0].tc;
+    vec2 uv2 = tscOut[3].tc - tscOut[0].tc;
     vec3 e1 = gl_in[1].gl_Position.xyz - gl_in[0].gl_Position.xyz;
     vec3 e2 = gl_in[3].gl_Position.xyz - gl_in[0].gl_Position.xyz;
     if(gl_InvocationID == 0)

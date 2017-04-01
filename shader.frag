@@ -1,5 +1,8 @@
 #version 440 core
-in highp vec2 tcOut;
+in TSE_OUT
+{
+    vec2 tc;
+} fsIn;
 
 out highp vec4 fColor;
 
@@ -18,5 +21,5 @@ uniform Light light;
 
 void main()
 {
-    fColor = texture(diffuseMap, tcOut);
+    fColor = texture(diffuseMap, fsIn.tc);
 }
