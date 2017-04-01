@@ -156,6 +156,7 @@ void Window::paintGL()
     {
         vao.bind();
         glDrawArrays(GL_PATCHES, 0, sizeof(vertices) / sizeof(vertices[0]));
+        qDebug() << program->log();
         vao.release();
     }
     program->release();

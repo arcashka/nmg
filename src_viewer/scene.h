@@ -8,6 +8,7 @@
 #include <QImage>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLFunctions>
+#include <QImage>
 
 #include "src_viewer/camera.h"
 #include "src_viewer/transform.h"
@@ -75,6 +76,8 @@ private:
 
 
     // Textures
+    QImage diffuse;
+    QImage displacement;
     QOpenGLTexture *diffuseMap;
     QOpenGLTexture *displacementMap;
 
@@ -115,51 +118,5 @@ static const Vertex vertices[] {
     Vertex(0.5f,  -0.5f,  -0.5f),
     Vertex(0.5f,  -0.5f,  0.5f),
 };
-
-
-//static const Vertex vertices[] {
-//    // front
-//    Vertex( 0.5f,  0.5f,  0.5f),
-//    Vertex(-0.5f,  0.5f,  0.5f),
-//    Vertex(-0.5f,  -0.5f,  0.5f),
-//    //Vertex(-0.5f,  -0.5f,  0.5f),
-//    Vertex(0.5f,  -0.5f,  0.5f),
-//    //Vertex( 0.5f,  0.5f,  0.5f),
-//    // back
-//    Vertex(-0.5f,  0.5f,  -0.5f),
-//    Vertex(0.5f,  0.5f,  -0.5f),
-//    Vertex(0.5f,  -0.5f,  -0.5f),
-//    //Vertex(0.5f,  -0.5f,  -0.5f),
-//    Vertex(-0.5f,  -0.5f,  -0.5f),
-//    //Vertex(-0.5f,  0.5f,  -0.5f),
-//    // top
-//    Vertex(0.5f, 0.5f,  -0.5f),
-//    Vertex(-0.5f, 0.5f,  -0.5f),
-//    Vertex(-0.5f, 0.5f,  0.5f),
-//    //Vertex(-0.5f, 0.5f,  0.5f),
-//    Vertex(0.5f, 0.5f,  0.5f),
-//    //Vertex(0.5f, 0.5f,  -0.5f),
-//    // bot
-//    Vertex(-0.5f,  -0.5f,  -0.5f),
-//    Vertex(0.5f,  -0.5f,  -0.5f),
-//    Vertex(0.5f,  -0.5f,  0.5f),
-//    //Vertex(0.5f,  -0.5f,  0.5f),
-//    Vertex(-0.5f,  -0.5f,  0.5f),
-//    //Vertex(-0.5f,  -0.5f,  -0.5f),
-//    // left
-//    Vertex(-0.5f,  0.5f,  0.5f),
-//    Vertex(-0.5f,  0.5f,  -0.5f),
-//    Vertex(-0.5f,  -0.5f,  -0.5f),
-//    //Vertex(-0.5f,  -0.5f,  -0.5f),
-//    Vertex(-0.5f,  -0.5f,  0.5f),
-//    //Vertex(-0.5f,  0.5f,  0.5f),
-//    // righ
-//    Vertex(0.5f,  0.5f,  -0.5f),
-//    Vertex(0.5f,  0.5f,  0.5f),
-//    Vertex(0.5f,  -0.5f,  0.5f),
-//    //Vertex(0.5f,  -0.5f,  0.5f),
-//    Vertex(0.5f,  -0.5f,  -0.5f),
-//    //Vertex(0.5f,  0.5f,  -0.5f)
-//};
 
 #endif // SCENE_H
