@@ -43,7 +43,7 @@ private:
     Scene scene;
     Light light;
 
-    float cameraSpeed = 0.01f;
+    float cameraSpeed = 0.1f;
     float rotatingSpeed = 100.0f;
 
     // Input stuff

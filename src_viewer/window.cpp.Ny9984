@@ -15,7 +15,7 @@ Window::~Window()
 
 void Window::update()
 {
-    scene.setTransformRotation(0.1f, 0.1f);
+    //scene.setTransformRotation(0.1f, 0.1f);
 
     program->bind();
     program->setUniformValue(u_modelToWorld, scene.getModelToWorldMatrix());
@@ -73,8 +73,8 @@ void Window::initializeGL()
     program->enableAttributeArray(1);
     int position = program->attributeLocation("position");
     int normal = program->attributeLocation("normal");
-    program->setAttributeBuffer(0, GL_FLOAT, 0, 3, 24);
-    program->setAttributeBuffer(1, GL_FLOAT, 12, 3, 24);
+    program->setAttributeBuffer(0, GL_FLOAT, Vertex::positionOfsset(), 3, 0);//Vertex::stride());
+    program->setAttributeBuffer(1, GL_FLOAT, Vertex::normalOffset(), 3, Vertex::stride());
 
     // THIS GOTTA BE IN THE PLACE THERE LIGHT STATS ARE CHANGING
     program->setUniformValue(u_lightColor, light.Color());
