@@ -1,6 +1,6 @@
 #version 440 core
 
-layout (quads , fractional_odd_spacing) in;
+layout (quads , equal_spacing) in;//fractional_odd_spacing) in;
 
 patch in highp vec3 normal;
 patch in highp mat3 tbn;
@@ -10,10 +10,10 @@ in TSC_OUT
     vec2 tc;
 } tseIn[];
 
-out vec2 highp tcOut;
 out TSE_OUT
 {
     vec2 tc;
+    float depth;
 } tseOut;
 
 uniform sampler2D displacementMap;
@@ -24,15 +24,19 @@ uniform mat4 cameraToView;
 
 void main(void)
 {
-    vec2 tc1 = mix(tseIn[0].tc, tseIn[1].tc, gl_TessCoord.x);
-    vec2 tc2 = mix(tseIn[2].tc, tseIn[3].tc, gl_TessCoord.x);
+    vec2 tc1 = mix(vec2(1.0, 1.0), vec2(0.0, 1.0), gl_TessCoord.x);
+    vec2 tc2 = mix(vec2(1.0, 0.0), vec2(0.0, 0.0), gl_TessCoord.x);
+//    vec2 tc1 = mix(tseIn[0].tc, tseIn[1].tc, gl_TessCoord.x);
+//    vec2 tc2 = mix(tseIn[2].tc, tseIn[3].tc, gl_TessCoord.x);
     tseOut.tc = mix(tc2, tc1, gl_TessCoord.y);
 
     vec4 p1 = mix(gl_in[0].gl_Position, gl_in[1].gl_Position, gl_TessCoord.x);
     vec4 p2 = mix(gl_in[2].gl_Position, gl_in[3].gl_Position, gl_TessCoord.x);
     vec4 p = mix(p2, p1, gl_TessCoord.y);
 
-    p += vec4(normal, 1.0) * texture(displacementMap, tseOut.tc).r;
-
+    float height = texture(displacementMap, tseOut.tc).r;
+    height = (height * 2) - 1;
+    p += vec4(normal, 0.0) * height / 20.0;
     gl_Position = cameraToView * worldToCamera * modelToWorld * p;
+    tseOut.depth = gl_Position.z;
 }

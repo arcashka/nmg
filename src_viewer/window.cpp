@@ -15,7 +15,7 @@ Window::~Window()
 
 void Window::update()
 {
-    scene.setTransformRotation(0.1f, 0.1f);
+    //scene.setTransformRotation(0.1f, 0.1f);
 
     program->bind();
     program->setUniformValue(u_modelToWorld, scene.getModelToWorldMatrix());
@@ -29,8 +29,9 @@ void Window::initializeGL()
     scene.initializeSceneOpenGLFunctions();
     connect(this, SIGNAL(frameSwapped()), this, SLOT(update()));
 
-    //glEnable(GL_CULL_FACE);
+    glEnable(GL_CULL_FACE);
     glClearColor(0.55f, 0.5f, 0.65f, 1.0f);
+    //glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
     // Add shaders sourse code
     program = new QOpenGLShaderProgram();
@@ -40,6 +41,7 @@ void Window::initializeGL()
     program->addShaderFromSourceFile(QOpenGLShader::TessellationEvaluation, ":/shaders/shader.tesse");
     program->link();
     program->bind();
+
 
     // uniform matrices locations
     u_modelToWorld = program->uniformLocation("modelToWorld");
@@ -150,8 +152,11 @@ void Window::mouseReleaseEvent(QMouseEvent *)
 
 void Window::paintGL()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);\
     program->bind();
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+
     if(scene.isReady())
     {
         // diffuse map attaching
