@@ -29,7 +29,6 @@ void Window::initializeGL()
     scene.initializeSceneOpenGLFunctions();
     connect(this, SIGNAL(frameSwapped()), this, SLOT(update()));
 
-    glEnable(GL_CULL_FACE);
     glClearColor(0.55f, 0.5f, 0.65f, 1.0f);
     //glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 

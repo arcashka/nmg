@@ -3,16 +3,7 @@
 layout (vertices = 4) out;
 
 patch out highp vec3 normal;
-<<<<<<< HEAD
 patch out vec2 tc[4];
-=======
-patch out highp mat3 tbn;
-
-out TSC_OUT
-{
-    vec2 tc;
-} tscOut[];
->>>>>>> parent of c1305b6... Задание со светом
 
 uniform mat4 modelToWorld;
 uniform mat4 worldToCamera;

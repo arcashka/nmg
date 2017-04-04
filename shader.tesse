@@ -3,16 +3,7 @@
 layout (quads , equal_spacing) in;
 
 patch in highp vec3 normal;
-<<<<<<< HEAD
 patch in vec2 tc[4];
-=======
-patch in highp mat3 tbn;
-
-in TSC_OUT
-{
-    vec2 tc;
-} tseIn[];
->>>>>>> parent of c1305b6... Задание со светом
 
 out TSE_OUT
 {
@@ -41,16 +32,9 @@ bool lowerToEdge(vec2 a)
 
 void main(void)
 {
-<<<<<<< HEAD
     // interpolate texture coordinates
     vec2 tc1 = mix(tc[0], tc[1], gl_TessCoord.x);
     vec2 tc2 = mix(tc[2], tc[3], gl_TessCoord.x);
-=======
-    vec2 tc1 = mix(vec2(1.0, 1.0), vec2(0.0, 1.0), gl_TessCoord.x);
-    vec2 tc2 = mix(vec2(1.0, 0.0), vec2(0.0, 0.0), gl_TessCoord.x);
-//    vec2 tc1 = mix(tseIn[0].tc, tseIn[1].tc, gl_TessCoord.x);
-//    vec2 tc2 = mix(tseIn[2].tc, tseIn[3].tc, gl_TessCoord.x);
->>>>>>> parent of c1305b6... Задание со светом
     tseOut.tc = mix(tc2, tc1, gl_TessCoord.y);
 
     // interpolate vertex coordinates
