@@ -113,10 +113,19 @@ void Window::keyPressEvent(QKeyEvent *event)
         scene.translateCameraBy(-cameraSpeed, scene.upCamera());
     if(event->key() == Qt::Key_E)
         scene.translateCameraBy(cameraSpeed, scene.upCamera());
+    if(event->key() == Qt::Key_I)
+        light.rotateUp();
+    if(event->key() == Qt::Key_K)
+        light.rotateDown();
+    if(event->key() == Qt::Key_J)
+        light.rotateLeft();
+    if(event->key() == Qt::Key_L)
+        light.rotateRight();
 
     program->bind();
     program->setUniformValue(u_worldToCamera, scene.getWorldToCameraMatrix());
     program->setUniformValue(u_cameraPosition, scene.getCameraPosition());
+    program->setUniformValue(u_lightDir, light.Direction());
     program->release();
 
     QWidget::update();
@@ -187,10 +196,17 @@ void Window::paintGL()
             this->displacementMap->bind();
             glUniform1i(program->uniformLocation("displacementMap"), 1);
         }
+        // normal map attaching
+        {
+            glActiveTexture(GL_TEXTURE2);
+            this->normalMap->bind();
+            glUniform1i(program->uniformLocation("normalMap"), 2);
+        }
         vao.bind();
         glDrawArrays(GL_PATCHES, 0, sizeof(vertices) / sizeof(vertices[0]));
         this->diffuseMap->release();
         this->displacementMap->release();
+        this->normalMap->release();
         vao.release();
     }
     program->release();
@@ -217,4 +233,12 @@ void Window::addDiffuse(QImage &diffuseMap)
     this->diffuseMap = new QOpenGLTexture(scene.getDiffuse().mirrored());
     this->diffuseMap->setMinificationFilter(QOpenGLTexture::Linear);
     this->diffuseMap->setMagnificationFilter(QOpenGLTexture::Linear);
+}
+
+void Window::addNormal(QImage &normalMap)
+{
+    scene.addNormalMap(normalMap, *program);
+    this->normalMap = new QOpenGLTexture(scene.getNormal().mirrored());
+    this->normalMap->setMinificationFilter(QOpenGLTexture::Linear);
+    this->normalMap->setMagnificationFilter(QOpenGLTexture::Linear);
 }

@@ -26,7 +26,7 @@ public:
     // accessors
     inline const QVector3D& Color()         { return color; }
     inline const float& AmbientIntensity()  { return ambientIntensity; }
-    inline const QVector3D& Direction()     { return direction; }
+    QVector3D& Direction()           { return direction; }
     inline const float& DiffuseIntensity()  { return diffuseIntensity; }
     inline const float& SpecularPower()     { return specularPower; }
     Light();

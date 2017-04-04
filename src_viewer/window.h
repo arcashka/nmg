@@ -32,6 +32,7 @@ public:
     void teardownGL();
     void addDisplacement(QImage &displacementMap);
     void addDiffuse(QImage &diffuseMap);
+    void addNormal(QImage &normalMap);
 protected:
     void keyPressEvent(QKeyEvent* event);
     void mousePressEvent(QMouseEvent* pe);
@@ -69,6 +70,7 @@ private:
 
     QOpenGLTexture *diffuseMap;
     QOpenGLTexture *displacementMap;
+    QOpenGLTexture *normalMap;
 };
 
 #endif // WINDOW_H

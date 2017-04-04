@@ -79,10 +79,18 @@ void Scene::addDisplacementMap(QImage &displacementMap, QOpenGLShaderProgram &pr
     ready = checkForReady();
 }
 
+void Scene::addNormalMap(QImage &normalMap, QOpenGLShaderProgram &program)
+{
+    normal = QImage(normalMap);
+    normalMapStored = true;
+    ready = checkForReady();
+}
+
 bool Scene::checkForReady()
 {
     return (diffuseMapStored &&
-            displacementMapStored);
+            displacementMapStored &&
+            normalMapStored);
 }
 
 

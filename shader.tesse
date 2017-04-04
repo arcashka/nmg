@@ -1,6 +1,6 @@
 #version 440 core
 
-layout (quads , equal_spacing) in;
+layout (quads , equal_spacing, ccw) in;
 
 patch in highp vec3 normal;
 patch in vec2 tc[4];
@@ -8,15 +8,9 @@ patch in vec2 tc[4];
 out TSE_OUT
 {
     vec2 tc;
-    float depth;
 } tseOut;
 
 uniform sampler2D displacementMap;
-
-uniform mat4 modelToWorld;
-uniform mat4 worldToCamera;
-uniform mat4 cameraToView;
-
 
 bool lowerToEdge(vec2 a)
 {
@@ -48,9 +42,7 @@ void main(void)
     if(lowerToEdge(tseOut.tc))
         height = 0;
 
-    // applay new height, find coordinates it the screen space
-    // calculate value for depth buffer
+    // applay new height
     p += vec4(normal, 0.0) * height / 20.0;
-    gl_Position = cameraToView * worldToCamera * modelToWorld * p;
-    tseOut.depth = (gl_Position.z) / 5.0;
+    gl_Position = p;
 }

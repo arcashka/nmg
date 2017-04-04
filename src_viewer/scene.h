@@ -62,11 +62,12 @@ public:
     // add texture to program
     void addDiffuseMap(QImage &diffuseMap, QOpenGLShaderProgram &program);
     void addDisplacementMap(QImage &displacementMap, QOpenGLShaderProgram &program);
+    void addNormalMap(QImage &normalMap, QOpenGLShaderProgram &program);
 
     // getters for texture
     QImage &getDiffuse()        { return diffuse; }
     QImage &getDisplacement()   { return displacement; }
-
+    QImage &getNormal()         { return normal; }
 
 private:
     // transformation matrice
@@ -78,16 +79,16 @@ private:
     bool ready = false;
     bool checkForReady();
 
-    Light light;
-
 
     // Textures
     QImage diffuse;
     QImage displacement;
+    QImage normal;
 
     // flags for textures
     bool diffuseMapStored       = false;
     bool displacementMapStored  = false;
+    bool normalMapStored        = false;
 };
 
 static const Vertex vertices[] {

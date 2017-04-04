@@ -317,6 +317,7 @@ void MainWindow::calcNormal() {
     NormalmapGenerator normalmapGenerator(mode, useRed, useGreen, useBlue, useAlpha);
     normalmap = normalmapGenerator.calculateNormalmap(inputScaled, kernel, strength, invert, tileable, keepLargeDetail, largeDetailScale, largeDetailHeight);
     normalmapRawIntensity = normalmapGenerator.getIntensityMap().convertToQImage();
+    ui->openGLWidget->addNormal(normalmap);
 }
 
 void MainWindow::calcSpec() {

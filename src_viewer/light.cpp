@@ -3,10 +3,10 @@
 Light::Light()
 {
     rotator = QQuaternion();
-    Light::ambientIntensity = 0.5f;
+    Light::ambientIntensity = 0.2f;
     Light::color = QVector3D(1.0f, 1.0f, 1.0f);
-    Light::diffuseIntensity = 0.8f;
-    Light::direction = QVector3D(0.0f, 0.0f, -1.0f);
+    Light::diffuseIntensity = 1.5f;
+    Light::direction = QVector3D(1.0f, 1.0f, 1.0f);
     Light::specularPower = 100.0f;
 }
 
