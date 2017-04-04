@@ -3,20 +3,7 @@
 layout (vertices = 4) out;
 
 patch out highp vec3 normal;
-patch out highp mat3 tbn;
-
-flat in vec3 normall[];
-
-out VS_OUT
-{
-    flat vec3 normal;
-} tscIn[];
-
-out TSC_OUT
-{
-    vec2 tc;
-    vec3 normal;
-} tscOut[];
+patch out vec2 tc[4];
 
 uniform mat4 modelToWorld;
 uniform mat4 worldToCamera;
@@ -32,35 +19,23 @@ void main(void)
 {
     mat4 mvp = cameraToView * worldToCamera * modelToWorld;
 
-    tscOut[0].tc = vec2(1.0, 1.0);
-    tscOut[1].tc = vec2(0.0, 1.0);
-    tscOut[2].tc = vec2(1.0, 0.0);
-    tscOut[3].tc = vec2(0.0, 0.0);
+    tc[0] = vec2(1.0, 1.0);
+    tc[1] = vec2(0.0, 1.0);
+    tc[2] = vec2(1.0, 0.0);
+    tc[3] = vec2(0.0, 0.0);
 
-    vec2 uv1 = tscOut[1].tc - tscOut[0].tc;
-    vec2 uv2 = tscOut[3].tc - tscOut[0].tc;
+    vec2 uv1 = tc[1] - tc[0];
+    vec2 uv2 = tc[3] - tc[0];
     vec3 e1 = gl_in[1].gl_Position.xyz - gl_in[0].gl_Position.xyz;
     vec3 e2 = gl_in[2].gl_Position.xyz - gl_in[1].gl_Position.xyz;
     if(gl_InvocationID == 0)
     {
-        vec4 p0 = mvp * gl_in[0].gl_Position;
-        vec4 p1 = mvp * gl_in[1].gl_Position;
-        vec4 p2 = mvp * gl_in[2].gl_Position;
-        vec4 p3 = mvp * gl_in[3].gl_Position;
-        p0 /= p0.w;
-        p1 /= p1.w;
-        p2 /= p2.w;
-        p3 /= p3.w;
-        float l0 = length(p2.xy - p0.xy) * 16.0 + 1.0;
-        float l1 = length(p3.xy - p2.xy) * 16.0 + 1.0;
-        float l2 = length(p3.xy - p1.xy) * 16.0 + 1.0;
-        float l3 = length(p1.xy - p0.xy) * 16.0 + 1.0;
-        gl_TessLevelOuter[0] = 40;//l0;
-        gl_TessLevelOuter[1] = 40;//l1;
-        gl_TessLevelOuter[2] = 40;//l2;
-        gl_TessLevelOuter[3] = 40;//l3;
-        gl_TessLevelInner[0] = 40;//min(l1, l3);
-        gl_TessLevelInner[1] = 40;//min(l0, l2);
+        gl_TessLevelOuter[0] = 30;
+        gl_TessLevelOuter[1] = 30;
+        gl_TessLevelOuter[2] = 30;
+        gl_TessLevelOuter[3] = 30;
+        gl_TessLevelInner[0] = 30;
+        gl_TessLevelInner[1] = 30;
     }
     gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position;
     tscOut[gl_InvocationID].normal = normall[gl_InvocationID];//tscIn[gl_InvocationID].normal;
@@ -75,7 +50,7 @@ void main(void)
     vec3 bitangent = cross(tangent, normal);
     if(dot(cross(normal, tangent), bitangent) < 0.0)
         tangent = tangent * (-1.0);
-    tbn = mat3(tangent, bitangent, normal);
+    //tbn = mat3(tangent, bitangent, normal);
 }
 
 

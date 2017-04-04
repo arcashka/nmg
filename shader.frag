@@ -1,4 +1,6 @@
 #version 440 core
+layout (depth_any) out float gl_FragDepth;
+
 in TSE_OUT
 {
     vec2 tc;
@@ -25,12 +27,6 @@ uniform Light light;
 
 void main()
 {
-    vec4 noral = modelToWorld * fsIn.normal;
-    noral = normalize(noral);
-    float lightFactor = dot(vec4(light.Direction, 1.0), noral);
-    //fColor = noral;
-    fColor = texture(diffuseMap, fsIn.tc) + lightFactor * 0.5f;
-    //vec4(0.0f, 0.0f, 0.0f, 1.0f);//texture(diffuseMap, fsIn.tc);
-    //gl_FragCoord.z = fsIn.depth;
-    //fColor = vec4(vec3(gl_FragCoord.z), 1.0f);
+    gl_FragDepth = fsIn.depth;
+    fColor = texture(diffuseMap, fsIn.tc);
 }
