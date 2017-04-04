@@ -5,10 +5,13 @@ in TSE_OUT
 {
     vec2 tc;
     float depth;
+    vec4 normal;
 } fsIn;
 
 out highp vec4 fColor;
-
+uniform mat4 modelToWorld;
+uniform mat4 worldToCamera;
+uniform mat4 cameraToView;
 uniform sampler2D diffuseMap;
 
 struct Light
