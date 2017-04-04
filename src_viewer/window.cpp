@@ -38,6 +38,7 @@ void Window::initializeGL()
     program->addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/shader.frag");
     program->addShaderFromSourceFile(QOpenGLShader::TessellationControl, ":/shaders/shader.tessc");
     program->addShaderFromSourceFile(QOpenGLShader::TessellationEvaluation, ":/shaders/shader.tesse");
+    program->addShaderFromSourceFile(QOpenGLShader::Geometry, ":/shaders/shader.geom");
     program->link();
     program->bind();
 

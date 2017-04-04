@@ -1,7 +1,7 @@
 #version 440 core
 layout (depth_any) out float gl_FragDepth;
 
-in TSE_OUT
+in GEOM_OUT
 {
     vec2 tc;
     float depth;

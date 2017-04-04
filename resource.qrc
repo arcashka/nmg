@@ -4,5 +4,6 @@
         <file>shader.vert</file>
         <file>shader.tessc</file>
         <file>shader.tesse</file>
+        <file>shader.geom</file>
     </qresource>
 </RCC>
