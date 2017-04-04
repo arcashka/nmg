@@ -23,6 +23,7 @@ public:
     QVector3D localRight()      const { return LOCAL_RIGHT; }
 
     const QMatrix4x4 &toMatrix();
+    QVector3D getPosition() { return translation; }
 private:
     bool dirty;
     QVector3D translation;

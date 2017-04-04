@@ -15,7 +15,7 @@ Window::~Window()
 
 void Window::update()
 {
-    //scene.setTransformRotation(0.1f, 0.1f);
+    scene.setTransformRotation(0.1f, 0.1f);
 
     program->bind();
     program->setUniformValue(u_modelToWorld, scene.getModelToWorldMatrix());
@@ -29,7 +29,6 @@ void Window::initializeGL()
     scene.initializeSceneOpenGLFunctions();
     connect(this, SIGNAL(frameSwapped()), this, SLOT(update()));
 
-    glEnable(GL_CULL_FACE);
     glClearColor(0.55f, 0.5f, 0.65f, 1.0f);
     //glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -47,6 +46,9 @@ void Window::initializeGL()
     u_modelToWorld = program->uniformLocation("modelToWorld");
     u_cameraToView = program->uniformLocation("cameraToView");
     u_worldToCamera = program->uniformLocation("worldToCamera");
+
+    // let's make our own depth buffer
+    u_cameraPosition = program->uniformLocation("cameraPos");
 
     // light stuff
     u_lightColor = program->uniformLocation("light.Color");
@@ -73,15 +75,20 @@ void Window::initializeGL()
     program->setAttributeBuffer(0, GL_FLOAT, 0, 3, 0);
 
     // THIS GOTTA BE IN THE PLACE THERE LIGHT STATS ARE CHANGING
+    ///////////////////////////////////////////////////////////////
     program->setUniformValue(u_lightColor, light.Color());
     program->setUniformValue(u_lightAmbI, light.AmbientIntensity());
     program->setUniformValue(u_lightDifI, light.DiffuseIntensity());
     program->setUniformValue(u_lightSpec, light.SpecularPower());
     program->setUniformValue(u_lightDir, light.Direction());
+    ///////////////////////////////////////////////////////////////
+
 
     program->setUniformValue(u_cameraToView, scene.getCameraToViewMatrix());
     program->setUniformValue(u_worldToCamera, scene.getWorldToCameraMatrix());
     program->setUniformValue(u_modelToWorld, scene.getModelToWorldMatrix());
+
+    program->setUniformValue(u_cameraPosition, scene.getCameraPosition());
     vao.release();
     bufferForVertices.release();
     program->release();
@@ -104,6 +111,7 @@ void Window::keyPressEvent(QKeyEvent *event)
 
     program->bind();
     program->setUniformValue(u_worldToCamera, scene.getWorldToCameraMatrix());
+    program->setUniformValue(u_cameraPosition, scene.getCameraPosition());
     program->release();
 
     QWidget::update();
@@ -127,8 +135,10 @@ void Window::mouseMoveEvent(QMouseEvent *pe)
                     scene.rightCamera());
         ptrMousePosition = pe->pos();
 
+        // new camera position and world to camera matrice going to the shader
         program->bind();
         program->setUniformValue(u_worldToCamera, scene.getWorldToCameraMatrix());
+        program->setUniformValue(u_cameraPosition, scene.getCameraPosition());
         program->release();
 
         QWidget::update();
@@ -152,7 +162,8 @@ void Window::mouseReleaseEvent(QMouseEvent *)
 
 void Window::paintGL()
 {
-    glClear(GL_COLOR_BUFFER_BIT);\
+    glClear(GL_COLOR_BUFFER_BIT);
+    //glClear(GL_DEPTH_BUFFER_BIT);
     program->bind();
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);

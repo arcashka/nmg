@@ -1,14 +1,9 @@
 #version 440 core
 
-layout (quads , equal_spacing) in;//fractional_odd_spacing) in;
+layout (quads , equal_spacing) in;
 
 patch in highp vec3 normal;
-patch in highp mat3 tbn;
-
-in TSC_OUT
-{
-    vec2 tc;
-} tseIn[];
+patch in vec2 tc[4];
 
 out TSE_OUT
 {
@@ -22,21 +17,40 @@ uniform mat4 modelToWorld;
 uniform mat4 worldToCamera;
 uniform mat4 cameraToView;
 
+
+bool lowerToEdge(vec2 a)
+{
+    if(abs(a.x) < 0.05)
+        return true;
+    if(abs(a.y) < 0.05)
+        return true;
+    if(abs(a.x - 1.0) < 0.05)
+        return true;
+    if(abs(a.y - 1.0) < 0.05)
+        return true;
+}
+
 void main(void)
 {
-    vec2 tc1 = mix(vec2(1.0, 1.0), vec2(0.0, 1.0), gl_TessCoord.x);
-    vec2 tc2 = mix(vec2(1.0, 0.0), vec2(0.0, 0.0), gl_TessCoord.x);
-//    vec2 tc1 = mix(tseIn[0].tc, tseIn[1].tc, gl_TessCoord.x);
-//    vec2 tc2 = mix(tseIn[2].tc, tseIn[3].tc, gl_TessCoord.x);
+    // interpolate texture coordinates
+    vec2 tc1 = mix(tc[0], tc[1], gl_TessCoord.x);
+    vec2 tc2 = mix(tc[2], tc[3], gl_TessCoord.x);
     tseOut.tc = mix(tc2, tc1, gl_TessCoord.y);
 
+    // interpolate vertex coordinates
     vec4 p1 = mix(gl_in[0].gl_Position, gl_in[1].gl_Position, gl_TessCoord.x);
     vec4 p2 = mix(gl_in[2].gl_Position, gl_in[3].gl_Position, gl_TessCoord.x);
     vec4 p = mix(p2, p1, gl_TessCoord.y);
 
+    // find height and set it to zero if we are too close to the edge
     float height = texture(displacementMap, tseOut.tc).r;
     height = (height * 2) - 1;
+    if(lowerToEdge(tseOut.tc))
+        height = 0;
+
+    // applay new height, find coordinates it the screen space
+    // calculate value for depth buffer
     p += vec4(normal, 0.0) * height / 20.0;
     gl_Position = cameraToView * worldToCamera * modelToWorld * p;
-    tseOut.depth = gl_Position.z;
+    tseOut.depth = (gl_Position.z) / 5.0;
 }

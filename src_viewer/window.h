@@ -65,6 +65,8 @@ private:
     GLuint u_worldToCamera;
     GLuint u_cameraToView;
 
+    GLuint u_cameraPosition;
+
     QOpenGLTexture *diffuseMap;
     QOpenGLTexture *displacementMap;
 };

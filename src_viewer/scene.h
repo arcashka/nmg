@@ -33,6 +33,8 @@ public:
     QVector3D forwardLocalCamera() const    { return camera.localForward(); }
     QVector3D upLocalCamera() const         { return camera.localUp(); }
     QVector3D rightLocalCamera() const      { return camera.localRight(); }
+    //
+    QVector3D getCameraPosition()           { return camera.getPosition(); }
 
 
     // transform
