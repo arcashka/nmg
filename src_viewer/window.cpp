@@ -167,10 +167,10 @@ void Window::mouseReleaseEvent(QMouseEvent *)
 void Window::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT);
-    //glClear(GL_DEPTH_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
     program->bind();
-    //glEnable(GL_DEPTH_TEST);
-    //glDepthFunc(GL_LESS);
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
 
     if(scene.isReady())
     {

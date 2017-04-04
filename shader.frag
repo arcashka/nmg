@@ -5,7 +5,6 @@ in TSE_OUT
 {
     vec2 tc;
     float depth;
-    vec4 normal;
 } fsIn;
 
 out highp vec4 fColor;
