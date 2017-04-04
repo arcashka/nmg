@@ -15,7 +15,7 @@ Window::~Window()
 
 void Window::update()
 {
-    scene.setTransformRotation(0.1f, 0.1f);
+    //scene.setTransformRotation(0.1f, 0.1f);
 
     program->bind();
     program->setUniformValue(u_modelToWorld, scene.getModelToWorldMatrix());
@@ -27,10 +27,10 @@ void Window::initializeGL()
 {
     initializeOpenGLFunctions();
     scene.initializeSceneOpenGLFunctions();
+    scene.calculateVertices();
     connect(this, SIGNAL(frameSwapped()), this, SLOT(update()));
 
     glClearColor(0.55f, 0.5f, 0.65f, 1.0f);
-    //glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
     // Add shaders sourse code
     program = new QOpenGLShaderProgram();
@@ -62,7 +62,8 @@ void Window::initializeGL()
     bufferForVertices.create();
     bufferForVertices.bind();
     bufferForVertices.setUsagePattern(QOpenGLBuffer::StaticDraw);
-    bufferForVertices.allocate(vertices, sizeof(vertices));
+    bufferForVertices.allocate(scene.vertices, sizeof(Vertex) *
+                               sizeof(scene.vertices) / sizeof(scene.vertices[0]));
 
     // Create Vertex Array Object
     vao.create();
@@ -73,11 +74,7 @@ void Window::initializeGL()
 
 
     program->enableAttributeArray(0);
-    program->enableAttributeArray(1);
-    int position = program->attributeLocation("position");
-    int normal = program->attributeLocation("normal");
-    program->setAttributeBuffer(0, GL_FLOAT, 0, 3, 24);
-    program->setAttributeBuffer(1, GL_FLOAT, 12, 3, 24);
+    program->setAttributeBuffer(0, GL_FLOAT, 0, 3, sizeof(Vertex));
 
     // THIS GOTTA BE IN THE PLACE THERE LIGHT STATS ARE CHANGING
     ///////////////////////////////////////////////////////////////
@@ -203,7 +200,7 @@ void Window::paintGL()
             glUniform1i(program->uniformLocation("normalMap"), 2);
         }
         vao.bind();
-        glDrawArrays(GL_PATCHES, 0, sizeof(vertices) / sizeof(vertices[0]));
+        glDrawArrays(GL_PATCHES, 0, sizeof(scene.vertices) / sizeof(scene.vertices[0]));
         this->diffuseMap->release();
         this->displacementMap->release();
         this->normalMap->release();

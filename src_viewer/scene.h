@@ -69,6 +69,9 @@ public:
     QImage &getDisplacement()   { return displacement; }
     QImage &getNormal()         { return normal; }
 
+    // vertices
+    Vertex vertices[2400];
+    void calculateVertices();
 private:
     // transformation matrice
     Camera camera;
@@ -91,38 +94,6 @@ private:
     bool normalMapStored        = false;
 };
 
-static const Vertex vertices[] {
-    // front
-    Vertex(-0.5f,  -0.5f,  0.5f, -1.0f, -1.0f, 1.0f ),
-    Vertex(0.5f,  -0.5f,  0.5f, 1.0f, -1.0f, 1.0f),
-    Vertex(-0.5f,  0.5f,  0.5f, -1.0f, 1.0f, 1.0f),
-    Vertex( 0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f ),
-    // back
-    Vertex(0.5f,  -0.5f,  -0.5f, 1.0f, -1.0f, -1.0f),
-    Vertex(-0.5f,  -0.5f,  -0.5f, -1.0f, -1.0f, -1.0f),
-    Vertex(0.5f,  0.5f,  -0.5f, 1.0f, 1.0f, -1.0f),
-    Vertex(-0.5f,  0.5f,  -0.5f, -1.0f, 1.0f, -1.0f),
-    // top
-    Vertex(-0.5f, 0.5f,  0.5f, -1.0f, 1.0f, 1.0f),
-    Vertex(0.5f, 0.5f,  0.5f, 1.0f, 1.0f, 1.0f),
-    Vertex(-0.5f, 0.5f,  -0.5f, -1.0f, 1.0f, -1.0f),
-    Vertex(0.5f, 0.5f,  -0.5f, 1.0f, 1.0f, -1.0f),
-    // bot
-    Vertex(0.5f,  -0.5f,  0.5f, 1.0f, -1.0f, 1.0f),
-    Vertex(-0.5f,  -0.5f,  0.5f, -1.0f, -1.0f, 1.0f),
-    Vertex(0.5f,  -0.5f,  -0.5f, 1.0f, -1.0f, -1.0f),
-    Vertex(-0.5f,  -0.5f,  -0.5f, -1.0f, -1.0f, -1.0f),
-    // left
-    Vertex(-0.5f,  -0.5f,  -0.5f, -1.0f, -1.0f, -1.0f),
-    Vertex(-0.5f,  -0.5f,  0.5f, -1.0f, -1.0f, 1.0f),
-    Vertex(-0.5f,  0.5f,  -0.5f, -1.0f, 1.0f, -1.0f),
-    Vertex(-0.5f,  0.5f,  0.5f, -1.0f, 1.0f, 1.0f),
-    // right
-    Vertex(0.5f,  -0.5f,  0.5f, 1.0f, -1.0f, 1.0f),
-    Vertex(0.5f,  -0.5f,  -0.5f, 1.0f, -1.0f, -1.0f),
-    Vertex(0.5f,  0.5f,  0.5f, 1.0f, 1.0f, 1.0f),
-    Vertex(0.5f,  0.5f,  -0.5f, 1.0f, 1.0f, -1.0f)
-};
 
 
 #endif // SCENE_H

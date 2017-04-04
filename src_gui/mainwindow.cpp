@@ -369,9 +369,6 @@ void MainWindow::calcDisplace() {
     displacementmap = specularmapGenerator.calculateSpecmap(input, scale, contrast);
 
 
-    ui->openGLWidget->addDisplacement(displacementmap);
-
-
     if(ui->checkBox_displace_blur->isChecked()) {
         int radius = ui->spinBox_displace_blurRadius->value();
         bool tileable = ui->checkBox_displace_blur_tileable->isChecked();
@@ -381,6 +378,7 @@ void MainWindow::calcDisplace() {
         IntensityMap outputMap = filter.calculate(inputMap, radius, tileable);
         displacementmap = outputMap.convertToQImage();
     }
+    ui->openGLWidget->addDisplacement(displacementmap);
 }
 
 void MainWindow::calcSsao() {

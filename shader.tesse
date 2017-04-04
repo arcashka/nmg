@@ -14,13 +14,13 @@ uniform sampler2D displacementMap;
 
 bool lowerToEdge(vec2 a)
 {
-    if(abs(a.x) < 0.05)
+    if(abs(a.x) < 0.005)
         return true;
-    if(abs(a.y) < 0.05)
+    if(abs(a.y) < 0.005)
         return true;
-    if(abs(a.x - 1.0) < 0.05)
+    if(abs(a.x - 1.0) < 0.005)
         return true;
-    if(abs(a.y - 1.0) < 0.05)
+    if(abs(a.y - 1.0) < 0.005)
         return true;
 }
 
@@ -43,6 +43,6 @@ void main(void)
         height = 0;
 
     // applay new height
-    p += vec4(normal, 0.0) * height / 20.0;
+    p += vec4(normal, 0.0) * height * 3.0;
     gl_Position = p;
 }
