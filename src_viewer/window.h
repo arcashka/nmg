@@ -26,7 +26,6 @@ class Window : public QOpenGLWidget,
 public:
     ~Window();
     Window(QGroupBox*);
-    Window() {}
     void initializeGL();
     void resizeGL(int width, int height);
     void paintGL();
@@ -54,8 +53,8 @@ private:
     float rotatingSpeed = 100.0f;
 
     // renderer properties
-    float depth = 5.0f;
-    int partitionFrequency = 40;
+    float depth = 4.0f;
+    int partitionFrequency = 20;
 
     // Input stuff
     bool pressed;

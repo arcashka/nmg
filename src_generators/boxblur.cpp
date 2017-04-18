@@ -1,4 +1,4 @@
-#include "boxblur.h"
+#include "src_generators/boxblur.h"
 
 #include <iostream>
 

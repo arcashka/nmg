@@ -1,4 +1,4 @@
-#include "specularmapgenerator.h"
+#include "src_generators/specularmapgenerator.h"
 #include <QColor>
 
 SpecularmapGenerator::SpecularmapGenerator(IntensityMap::Mode mode, double redMultiplier, double greenMultiplier, double blueMultiplier, double alphaMultiplier)

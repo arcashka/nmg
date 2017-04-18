@@ -1,7 +1,7 @@
 #ifndef GAUSSIANBLUR_H
 #define GAUSSIANBLUR_H
 
-#include "intensitymap.h"
+#include "src_generators/intensitymap.h"
 
 class GaussianBlur
 {

@@ -1,6 +1,6 @@
-#include "mainwindow.h"
+#include "src_gui/mainwindow.h"
 #include "ui_mainwindow.h"
-#include "graphicsscene.h"
+#include "src_gui/graphicsscene.h"
 #include "src_generators/normalmapgenerator.h"
 #include "src_generators/specularmapgenerator.h"
 #include "src_generators/ssaogenerator.h"
@@ -66,7 +66,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     readSettings();
-    ui->openGLWidget = new Window();
     setUiColors();
 
     // cмотрим, если запущена с аргументами
@@ -862,8 +861,8 @@ void MainWindow::enableAutoupdate(bool on) {
 //add single image to queue
 void MainWindow::addImageToQueue(QUrl url) {
     QueueItem *item = new QueueItem(url, url.fileName(), ui->listWidget_queue, 0);
-
-    QIcon icon(QPixmap(url.toLocalFile()).scaled(64, 64, Qt::KeepAspectRatio));
+    QPixmap biba = QPixmap(url.toLocalFile()).scaled(64, 64, Qt::KeepAspectRatio);
+    QIcon icon(biba);
     item->setIcon(icon);
 
     ui->listWidget_queue->addItem(item);
@@ -1194,7 +1193,11 @@ void MainWindow::resetUiColors() {
 
 void MainWindow::on_horizontalScrollBar_depthValue_valueChanged(int value)
 {
-    ui->openGLWidget->setDepthValue(float(value) / 30.0f);
+    if(value != 50)
+        value -= 50;
+    else value = 1;
+
+    ui->openGLWidget->setDepthValue(float(value) / 5.0f);
 }
 
 void MainWindow::on_horizontalScrollBar_valueChanged(int value)

@@ -43,6 +43,12 @@ void Window::initializeGL()
     program->bind();
 
 
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_FRONT);
+    glDepthFunc(GL_LESS);
+
+
     // uniform matrices locations
     u_modelToWorld = program->uniformLocation("modelToWorld");
     u_cameraToView = program->uniformLocation("cameraToView");
@@ -184,8 +190,6 @@ void Window::paintGL()
     glClear(GL_COLOR_BUFFER_BIT);
     glClear(GL_DEPTH_BUFFER_BIT);
     program->bind();
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
 
     if(scene.isReady())
     {

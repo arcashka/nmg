@@ -12,7 +12,6 @@ INPUT(
 ./debug\boxblur.o
 ./debug\ssaogenerator.o
 ./debug\listwidget.o
-./debug\openglwidget.o
 ./debug\camera.o
 ./debug\light.o
 ./debug\scene.o
@@ -23,6 +22,5 @@ INPUT(
 ./debug\moc_graphicsview.o
 ./debug\moc_listwidget.o
 ./debug\moc_clickablelabel.o
-./debug\moc_openglwidget.o
 ./debug\moc_window.o
 );

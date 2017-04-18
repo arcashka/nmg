@@ -1,4 +1,4 @@
-#include "queueitem.h"
+#include "src_gui/queueitem.h"
 
 QueueItem::QueueItem(QUrl imageUrl, const QString &text, QListWidget *view, int type)
     : QListWidgetItem(text, view, type)

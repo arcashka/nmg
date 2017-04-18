@@ -21,7 +21,6 @@ SOURCES += src_viewer/main.cpp\
     src_generators/boxblur.cpp \
     src_generators/ssaogenerator.cpp \
     src_gui/listwidget.cpp \
-    src_gui/openglwidget.cpp \
     src_viewer/camera.cpp \
     src_viewer/light.cpp \
     src_viewer/scene.cpp \
@@ -41,7 +40,6 @@ HEADERS  += src_gui/mainwindow.h \
     src_generators/ssaogenerator.h \
     src_gui/listwidget.h \
     src_gui/clickablelabel.h \
-    src_gui/openglwidget.h \
     src_viewer/camera.h \
     src_viewer/light.h \
     src_viewer/scene.h \

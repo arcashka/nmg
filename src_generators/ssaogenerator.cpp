@@ -1,4 +1,4 @@
-#include "ssaogenerator.h"
+#include "src_generators/ssaogenerator.h"
 #include <QVector3D>
 #include <QMatrix4x4>
 #include <QColor>

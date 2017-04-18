@@ -1,4 +1,4 @@
-#include "gaussianblur.h"
+#include "src_generators/gaussianblur.h"
 #include <math.h>
 #include <iostream>
 

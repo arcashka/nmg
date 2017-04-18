@@ -1,4 +1,4 @@
-#include "normalmapgenerator.h"
+#include "src_generators/normalmapgenerator.h"
 #include <QVector3D>
 #include <QColor>
 

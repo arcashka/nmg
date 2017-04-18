@@ -1,7 +1,7 @@
 #ifndef SSAOGENERATOR_H
 #define SSAOGENERATOR_H
 
-#include "intensitymap.h"
+#include "src_generators/intensitymap.h"
 #include <QImage>
 
 //code is based on http://john-chapman-graphics.blogspot.de/2013/01/ssao-tutorial.html

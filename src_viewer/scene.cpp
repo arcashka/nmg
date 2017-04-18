@@ -121,9 +121,9 @@ void Scene::calculateVertices()
             stepV = QVector3D(0.0, 0.0, -0.1);
             break;
         case 5:
-            start = QVector3D(-0.5, -0.5, 0.5);
+            start = QVector3D(-0.5, -0.5, -0.5);
             stepU = QVector3D(0.1, 0.0, 0.0);
-            stepV = QVector3D(0.0, 0.0, -0.1);
+            stepV = QVector3D(0.0, 0.0, 0.1);
             break;
         default:
             break;

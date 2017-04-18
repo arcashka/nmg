@@ -1,7 +1,7 @@
 #ifndef BOXBLUR_H
 #define BOXBLUR_H
 
-#include "intensitymap.h"
+#include "src_generators/intensitymap.h"
 
 class BoxBlur
 {

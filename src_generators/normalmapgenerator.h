@@ -2,7 +2,7 @@
 #define SOBEL_H
 
 #include <QImage>
-#include "intensitymap.h"
+#include "src_generators/intensitymap.h"
 
 class NormalmapGenerator
 {

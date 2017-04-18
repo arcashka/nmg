@@ -1,7 +1,7 @@
 #ifndef SPECULARMAPGENERATOR_H
 #define SPECULARMAPGENERATOR_H
 
-#include "intensitymap.h"
+#include "src_generators/intensitymap.h"
 
 class SpecularmapGenerator
 {

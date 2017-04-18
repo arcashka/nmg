@@ -1,4 +1,4 @@
-#include "intensitymap.h"
+#include "src_generators/intensitymap.h"
 #include <QColor>
 #include <iostream>
 

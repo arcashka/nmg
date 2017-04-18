@@ -1,4 +1,4 @@
-#include "graphicsview.h"
+#include "src_gui/graphicsview.h"
 #include <QMimeData>
 #include <QDropEvent>
 #include <iostream>

@@ -4,7 +4,7 @@
 #include <QtOpenGL/QtOpenGL>
 #include <QMainWindow>
 #include <QUrl>
-#include "queueitem.h"
+#include "src_gui/queueitem.h"
 #include "src_generators/intensitymap.h"
 
 namespace Ui {

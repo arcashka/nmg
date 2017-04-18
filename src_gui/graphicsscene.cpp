@@ -1,4 +1,4 @@
-#include "graphicsscene.h"
+#include "src_gui/graphicsscene.h"
 #include <QGraphicsSceneDragDropEvent>
 
 GraphicsScene::GraphicsScene(QObject *parent)
