@@ -11,6 +11,7 @@ out TSE_OUT
 } tseOut;
 
 uniform sampler2D displacementMap;
+uniform float depth;
 
 bool lowerToEdge(vec2 a)
 {
@@ -43,6 +44,6 @@ void main(void)
         height = 0;
 
     // applay new height
-    p += vec4(normal, 0.0) * height * 3.0;
+    p += vec4(normal, 0.0) * height * depth;
     gl_Position = p;
 }

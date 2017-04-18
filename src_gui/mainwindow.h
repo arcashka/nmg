@@ -115,6 +115,8 @@ private slots:
     void editOutputPathQueue();
     void queueItemDoubleClicked(QListWidgetItem *item);
     void normalmapSizeChanged();
+    void on_horizontalScrollBar_depthValue_valueChanged(int value);
+    void on_horizontalScrollBar_valueChanged(int value);
 };
 
 #endif // MAINWINDOW_H

@@ -31,7 +31,6 @@ MainWindow::MainWindow(QWidget *parent) :
     stopQueue(false)
 {
     ui->setupUi(this);
-
     // поддерживаемые форматы
     supportedImageformats << "*.png" << "*.jpg" << "*.jpeg" << "*.tiff"
                           << "*.tif" << "*.ppm" << "*.bmp"  << "*.xpm"
@@ -39,7 +38,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // подключаем сигналы
     connectSignalSlots();
-
 
     hideAdvancedSettings();
 
@@ -68,7 +66,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     readSettings();
-
+    ui->openGLWidget = new Window();
     setUiColors();
 
     // cмотрим, если запущена с аргументами
@@ -545,7 +543,6 @@ void MainWindow::processQueue() {
     ui->pushButton_openExportFolder->setEnabled(true);
 }
 
-
 void MainWindow::focusToOpenGl()
 {
     ui->openGLWidget->setFocus();
@@ -996,6 +993,8 @@ void MainWindow::connectSignalSlots() {
     //normalmap size preview text
     connect(ui->spinBox_normalmapSize, SIGNAL(valueChanged(int)), this, SLOT(normalmapSizeChanged()));
 
+    connect(ui->horizontalScrollBar_depthValue, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalScrollBar_depthValue_valueChanged(int)));
+    connect(ui->horizontalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalScrollBar_valueChanged(int)));
 
     //Shortcuts
     QShortcut *save = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_S), this, 0, 0, Qt::ApplicationShortcut);
@@ -1193,4 +1192,12 @@ void MainWindow::resetUiColors() {
     setUiColors();
 }
 
+void MainWindow::on_horizontalScrollBar_depthValue_valueChanged(int value)
+{
+    ui->openGLWidget->setDepthValue(float(value) / 30.0f);
+}
 
+void MainWindow::on_horizontalScrollBar_valueChanged(int value)
+{
+    ui->openGLWidget->setPartitionFrequency(value);
+}

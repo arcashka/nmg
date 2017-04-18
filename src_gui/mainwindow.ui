@@ -1651,22 +1651,74 @@
          <property name="title">
           <string>Preview</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <widget class="QPushButton" name="pushButtonLight">
-            <property name="text">
-             <string>Change Light Direction</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="Window" name="openGLWidget">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <widget class="Window" name="openGLWidget">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>52</y>
+            <width>780</width>
+            <height>705</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QWidget" name="layoutWidget">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>781</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_10">
+           <item>
+            <widget class="QPushButton" name="pushButtonLight">
+             <property name="text">
+              <string>Change Light Direction</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout">
+             <item>
+              <widget class="QLabel" name="label_changeDepth">
+               <property name="text">
+                <string>Change depth value</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QScrollBar" name="horizontalScrollBar_depthValue">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_11">
+             <item>
+              <widget class="QLabel" name="label_changePartitionFrequency">
+               <property name="text">
+                <string>Change partition frequency</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QScrollBar" name="horizontalScrollBar">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
         </widget>
        </widget>
       </item>
@@ -1696,7 +1748,7 @@
   <customwidget>
    <class>Window</class>
    <extends>QOpenGLWidget</extends>
-   <header>window.h</header>
+   <header location="global">window.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

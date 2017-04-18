@@ -8,6 +8,7 @@ patch out vec2 tc[4];
 uniform mat4 modelToWorld;
 uniform mat4 worldToCamera;
 uniform mat4 cameraToView;
+uniform int partFreq;
 
 float lenght(vec2 a)
 {
@@ -30,12 +31,12 @@ void main(void)
     vec3 e2 = gl_in[2].gl_Position.xyz - gl_in[1].gl_Position.xyz;
     if(gl_InvocationID == 0)
     {
-        gl_TessLevelOuter[0] = 40;
-        gl_TessLevelOuter[1] = 40;
-        gl_TessLevelOuter[2] = 40;
-        gl_TessLevelOuter[3] = 40;
-        gl_TessLevelInner[0] = 40;
-        gl_TessLevelInner[1] = 40;
+        gl_TessLevelOuter[0] = partFreq;
+        gl_TessLevelOuter[1] = partFreq;
+        gl_TessLevelOuter[2] = partFreq;
+        gl_TessLevelOuter[3] = partFreq;
+        gl_TessLevelInner[0] = partFreq;
+        gl_TessLevelInner[1] = partFreq;
     }
     gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position;
     normal = cross(e1, e2);

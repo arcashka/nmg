@@ -58,6 +58,10 @@ void Window::initializeGL()
     u_lightDir = program->uniformLocation("light.Direction");
     u_lightSpec = program->uniformLocation("light.SpecPower");
 
+    // renderer properties
+    u_depth = program->uniformLocation("depth");
+    u_partFreq = program->uniformLocation("partFreq");
+
     // Create Buffer for vao
     bufferForVertices.create();
     bufferForVertices.bind();
@@ -91,6 +95,10 @@ void Window::initializeGL()
     program->setUniformValue(u_modelToWorld, scene.getModelToWorldMatrix());
 
     program->setUniformValue(u_cameraPosition, scene.getCameraPosition());
+
+    program->setUniformValue(u_depth, depth);
+    program->setUniformValue(u_partFreq, partitionFrequency);
+
     vao.release();
     bufferForVertices.release();
     program->release();
@@ -225,7 +233,7 @@ void Window::addDisplacement(QImage &displacementMap)
 }
 
 void Window::addDiffuse(QImage &diffuseMap)
-{
+{   
     scene.addDiffuseMap(diffuseMap, *program);
     this->diffuseMap = new QOpenGLTexture(scene.getDiffuse().mirrored());
     this->diffuseMap->setMinificationFilter(QOpenGLTexture::Linear);
@@ -238,4 +246,22 @@ void Window::addNormal(QImage &normalMap)
     this->normalMap = new QOpenGLTexture(scene.getNormal().mirrored());
     this->normalMap->setMinificationFilter(QOpenGLTexture::Linear);
     this->normalMap->setMagnificationFilter(QOpenGLTexture::Linear);
+}
+
+void Window::setDepthValue(float newDepth)
+{
+    depth = newDepth;
+
+    program->bind();
+    program->setUniformValue(u_depth, depth);
+    program->release();
+}
+
+void Window::setPartitionFrequency(int newPartFreq)
+{
+    partitionFrequency = newPartFreq;
+
+    program->bind();
+    program->setUniformValue(u_partFreq, partitionFrequency);
+    program->release();
 }

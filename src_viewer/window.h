@@ -26,13 +26,19 @@ class Window : public QOpenGLWidget,
 public:
     ~Window();
     Window(QGroupBox*);
+    Window() {}
     void initializeGL();
     void resizeGL(int width, int height);
     void paintGL();
     void teardownGL();
+    // to control from main program
+    // texture adding
     void addDisplacement(QImage &displacementMap);
     void addDiffuse(QImage &diffuseMap);
     void addNormal(QImage &normalMap);
+
+    void setDepthValue(float newDepth);
+    void setPartitionFrequency(int newPartFreq);
 protected:
     void keyPressEvent(QKeyEvent* event);
     void mousePressEvent(QMouseEvent* pe);
@@ -46,6 +52,10 @@ private:
 
     float cameraSpeed = 0.1f;
     float rotatingSpeed = 100.0f;
+
+    // renderer properties
+    float depth = 5.0f;
+    int partitionFrequency = 40;
 
     // Input stuff
     bool pressed;
@@ -67,6 +77,9 @@ private:
     GLuint u_cameraToView;
 
     GLuint u_cameraPosition;
+
+    GLuint u_depth;
+    GLuint u_partFreq;
 
     QOpenGLTexture *diffuseMap;
     QOpenGLTexture *displacementMap;
